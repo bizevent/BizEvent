@@ -1,0 +1,46 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+	<div>
+            <aura:renderIf isTrue="{!v.showError}">
+                <div id="error">
+                    <ui:outputRichText value="{!v.errorMessage}"/>
+                </div>
+            </aura:renderIf>
+            <div id="sfdc_username_container" class="sfdc">
+                <span id="sfdc_user" class="login-icon" data-icon="a"></span>
+                <ui:inputText value="" aura:id="firstname" placeholder="{!v.firstnameLabel}" keyup="{!c.onKeyUp}" class="input sfdc_usernameinput sfdc"/>
+            </div>
+
+            <div id="sfdc_nickname_container" class="sfdc">
+                <span id="sfdc_user" class="login-icon" data-icon="a"></span>
+                <ui:inputText value="" aura:id="lastname" placeholder="{!v.lastnameLabel}" keyup="{!c.onKeyUp}" class="input sfdc_usernameinput sfdc"/>
+            </div>
+
+            <div id="sfdc_email_container" class="sfdc">
+                <span id="sfdc_user" class="login-icon" data-icon="k"></span>
+                <ui:inputText value="" aura:id="email" placeholder="{!v.emailLabel}" keyup="{!c.onKeyUp}" class="input sfdc_usernameinput sfdc"/>
+            </div>
+            
+            <aura:iteration aura:id="extraFields" items="{!v.extraFields}" var="curField" indexVar="index">
+                <div id="sfdc_extrafield_container" class="sfdc">
+                    <span id="sfdc_user" class="login-icon" data-icon="a"></span>
+                    <ui:inputText value="{!curField.value}" aura:id="{!curField.fieldPath}" placeholder="{!curField.label}" keyup="{!c.onKeyUp}" class="input sfdc_extrafieldinput sfdc"/>
+                </div>
+            </aura:iteration>
+
+            <aura:renderIf isTrue="{!v.includePasswordField}">
+                <div id="sfdc_password_container" class="sfdc">
+                    <span id="sfdc_lock" class="login-icon sfdc" data-icon="c"></span>
+                    <ui:inputSecret value="" aura:id="password" placeholder="{!v.passwordLabel}" keyup="{!c.onKeyUp}" class="input sfdc_passwordinput sfdc"/>
+                </div>
+    
+                <div id="sfdc_confirm_password_container" class="sfdc">
+                    <span id="sfdc_lock" class="login-icon sfdc" data-icon="c"></span>
+                    <ui:inputSecret value="" aura:id="confirmPassword" placeholder="{!v.confirmPasswordLabel}" keyup="{!c.onKeyUp}" class="input sfdc_passwordinput sfdc"/>
+                </div>
+            </aura:renderIf>
+
+            <div class="sfdc">
+                <ui:button aura:id="submitButton" label="{!v.submitButtonLabel}" press="{!c.handleSelfRegister}" class="sfdc_button"/>
+            </div>
+    </div>
+</aura:component>
